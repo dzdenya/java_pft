@@ -18,6 +18,10 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("home page"));
   }
 
+  public void returnToHomePageAfterDeletiong() {
+    click(By.linkText("home"));
+  }
+
   public void submitContactCreation() {
     click(By.name("submit"));
   }
@@ -31,12 +35,12 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void initContactGreation() {
-    click(By.name("add new"));
+  public void closeAlert() {
+    wd.switchTo().alert().accept();
   }
 
-  public void deleteContactGroups() {
-    click(By.name("delete"));
+  public void deleteContact() {
+    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
 
   public void selectContact() {
