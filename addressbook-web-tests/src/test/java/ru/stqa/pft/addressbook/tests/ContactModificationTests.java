@@ -14,7 +14,7 @@ public class ContactModificationTests extends TestBase {
     app.getNavigationHelper().gotoHomePage();
     if (! app.getContactHelper().isThereAContact()){
       app.getContactHelper().initContactGreation();
-      app.getContactHelper().createContact(new ContactData("Иван", "Иванов", "123456", "sobaka@mail.com", "Пушкина", null), false);
+      app.getContactHelper().createContact(new ContactData("Иван", "Иванов", "123456", "sobaka@mail.com", "Пушкина", "test1"), true);
     }
     app.getContactHelper().selectContact();
     app.getContactHelper().initContactModification();
