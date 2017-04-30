@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Denys on 4/30/2017.
  */
 public class Collections {
-  
+
   public static void main (String[] args){
     String[] langs = {"java","C#","Python","php"};
 
