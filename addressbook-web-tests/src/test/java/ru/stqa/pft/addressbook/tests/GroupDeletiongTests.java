@@ -13,7 +13,7 @@ public class GroupDeletiongTests extends TestBase{
     public void testGroupDeletiong() {
         app.getNavigationHelper().gotoGroupPage();
         if (! app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(new GroupData("test1", null, "test3"));
+            app.getGroupHelper().createGroup(new GroupData("test1", null, null));
         }
         List<GroupData> before = app.getGroupHelper().getGroupList();
         app.getGroupHelper().selectGroup(before.size() - 1);
@@ -24,7 +24,6 @@ public class GroupDeletiongTests extends TestBase{
 
         before.remove(before.size() - 1);
         Assert.assertEquals(before, after);
-
     }
 
 }
