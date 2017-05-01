@@ -38,7 +38,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("mobile"), contactData.getMobile());
     type(By.name("email"), contactData.getEmail());
 
-    if ( creation) {
+    if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -61,8 +61,9 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void initContactModification() {
-    click(By.cssSelector("img[alt = 'Edit']")); //тоже самое> click(By.xpath("//img[@alt = 'Edit']"));
+  public void initContactModification(int index) {
+//    wd.findElements(By.xpath("//img[@alt = 'Edit']")).get(index).click();
+    wd.findElements(By.cssSelector("img[alt = 'Edit']")).get(index).click();; //тоже самое> click(By.xpath("//img[@alt = 'Edit']"));
   }
 
   public void submitContactModification() {
@@ -84,16 +85,16 @@ public class ContactHelper extends HelperBase {
   }
 
   public List<ContactData> getContactList() {
-    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<ContactData> contacts = new ArrayList<>();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name = 'entry']"));
     for (WebElement element: elements) {
-      String lastname = element.findElement(By.xpath(".//td[2]")).getText();
-      String firstname = element.findElement(By.xpath(".//td[3]")).getText();
+      String firstname = element.findElement(By.xpath(".//td[2]")).getText();
+      String lastname = element.findElement(By.xpath(".//td[3]")).getText();
 //      String mobile = element.getText();
 //      String email = element.getText();
 //      String address = element.getText();
       int id = Integer.parseInt( element.findElement(By.tagName("input")).getAttribute("value"));
-      ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null);
+      ContactData contact = new ContactData(id, lastname, firstname, null, null, null, null);
       contacts.add(contact);
     }
     return contacts;

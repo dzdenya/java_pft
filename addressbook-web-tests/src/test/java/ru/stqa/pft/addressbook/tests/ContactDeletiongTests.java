@@ -16,7 +16,7 @@ public class ContactDeletiongTests extends TestBase{
     app.getNavigationHelper().gotoHomePage();
     if (! app.getContactHelper().isThereAContact()){
       app.getContactHelper().initContactGreation();
-      app.getContactHelper().createContact(new ContactData("Иван", "Иванов", "123456", "sobaka@mail.com", "Пушкина", null), false);
+      app.getContactHelper().createContact(new ContactData("Иван", "Иванов", null, null, null, null), true);
     }
 //    app.getContactHelper().selectContact();
 //    int before = app.getContactHelper().getContactCount();

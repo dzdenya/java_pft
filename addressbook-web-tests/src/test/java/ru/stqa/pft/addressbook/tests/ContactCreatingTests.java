@@ -13,16 +13,17 @@ public class ContactCreatingTests extends TestBase {
     
     @Test
     public void ContactCreatingTests() {
-//        int before = app.getContactHelper().getContactCount();
+        app.getNavigationHelper().gotoGroupPage();
+        if (! app.getGroupHelper().isThereAGroupForContact()) {
+            app.getGroupHelper().createGroup(new GroupData("test1", null, null));
+        }
+        app.getNavigationHelper().gotoHomePage();
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getNavigationHelper().gotoAddNewPage();
-        ContactData contact = new ContactData(before.get(before.size() -1).getId(),"Иван", "Иванов", null, null, null, null);
+        ContactData contact = new ContactData("Иван", "Иванов", null, null, null, "test1");
         app.getContactHelper().createContact(contact, true);
-//        int after = app.getContactHelper().getContactCount();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() + 1);
-
-
 
         before.add(contact);
         Comparator<? super ContactData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
