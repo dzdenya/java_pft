@@ -45,6 +45,20 @@ public class ContactHelper extends HelperBase {
     }
   }
 
+  public void modifyContact(int index, ContactData contact) {
+    initContactModification(index);
+    fillContactForm(contact, false);
+    submitContactModification();
+    returnToHomePage();
+  }
+
+  public void deleteContact(List<ContactData> before) {
+    selectContact(before.size() - 1);
+    deleteContact();
+    closeAlert();
+    returnToHomePageAfterDeletiong();
+  }
+
   public void closeAlert() {
     wd.switchTo().alert().accept();
   }
@@ -74,7 +88,7 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public void createContact(ContactData contact, boolean b) {
+  public void create(ContactData contact, boolean b) {
     fillContactForm(contact, b);
     submitContactCreation();
     returnToHomePage();
@@ -84,7 +98,7 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<>();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name = 'entry']"));
     for (WebElement element: elements) {
