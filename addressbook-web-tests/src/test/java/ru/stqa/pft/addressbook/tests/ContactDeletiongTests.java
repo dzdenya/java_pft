@@ -17,7 +17,11 @@ public class ContactDeletiongTests extends TestBase{
     app.goTo().homePage();
     if (app.contact().list().size() == 0){
       app.contact().initContactGreation();
-      app.contact().create(new ContactData("Иван", "Иванов", null, null, null, "test1"), true);
+      app.contact().create(new ContactData()
+              .withFirstname("Иван")
+              .withLastname("Иванов")
+              .withGroup("test1")
+              , true);
     }
   }
 

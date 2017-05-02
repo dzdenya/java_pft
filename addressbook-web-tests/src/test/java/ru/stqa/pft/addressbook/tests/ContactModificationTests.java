@@ -18,7 +18,13 @@ public class ContactModificationTests extends TestBase {
     app.goTo().homePage();
     if (app.contact().list().size() == 0) {
       app.contact().initContactGreation();
-      app.contact().create(new ContactData("Иван", "Иванов", "123456", "sobaka@mail.com", "Пушкина", "test1"), true);
+      app.contact().create(new ContactData()
+                      .withFirstname("Иван")
+                      .withLastname("Иванов")
+                      .withMobile("123456")
+                      .withEmail("sobaka@mail.com")
+                      .withAddress("Пушкина").withGroup("test1")
+              , true);
     }
   }
 
@@ -26,7 +32,10 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification() {
     List<ContactData> before = app.contact().list();
     int index = before.size() -1;
-    ContactData contact = new ContactData(before.get(index).getId(),"Иван", "Иванов", null, null, null, null);
+    ContactData contact = new ContactData()
+            .withId(before.get(index).getId())
+            .withFirstname("Иван")
+            .withLastname("Иванов");
     app.contact().modifyContact(index, contact);
 
     List<ContactData> after = app.contact().list();
