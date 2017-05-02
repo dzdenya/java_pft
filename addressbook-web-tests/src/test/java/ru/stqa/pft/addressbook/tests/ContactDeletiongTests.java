@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Denys on 4/29/2017.
@@ -15,7 +16,7 @@ public class ContactDeletiongTests extends TestBase{
   @BeforeMethod
   public void ensurePrecondition() {
     app.goTo().homePage();
-    if (app.contact().list().size() == 0){
+    if (app.contact().all().size() == 0){
       app.contact().initContactGreation();
       app.contact().create(new ContactData()
               .withFirstname("Иван")
@@ -26,13 +27,14 @@ public class ContactDeletiongTests extends TestBase{
   }
 
   @Test
-  public void testContactModification() {
-    List<ContactData> before = app.contact().list();
-    app.contact().deleteContact(before);
-    List<ContactData> after = app.contact().list();
+  public void testContactDeletion() {
+    Set<ContactData> before = app.contact().all();
+    ContactData deleteContact = before.iterator().next();
+    app.contact().deleteContact(deleteContact);
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size() - 1);
 
-    before.remove(before.size() - 1);
+    before.remove(deleteContact);
     Assert.assertEquals(before,after);
   }
 
