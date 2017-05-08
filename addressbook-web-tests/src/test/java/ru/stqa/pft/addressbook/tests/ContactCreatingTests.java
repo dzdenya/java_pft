@@ -14,7 +14,7 @@ public class ContactCreatingTests extends TestBase {
     @BeforeMethod
     public void ensurePrecondition() {
         app.goTo().groupPage();
-        if (! app.group().isThereAGroupForContact()) {
+        if (app.group().all().size() == 0) {
             app.group().create(new GroupData().withName("test1"));
         }
         app.goTo().homePage();
@@ -33,6 +33,4 @@ public class ContactCreatingTests extends TestBase {
         assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
     }
-
-
 }

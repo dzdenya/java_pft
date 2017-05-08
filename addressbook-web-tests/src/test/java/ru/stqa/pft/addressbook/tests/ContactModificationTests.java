@@ -24,12 +24,12 @@ public class ContactModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePrecondition() {
     app.goTo().homePage();
-    if (app.contact().list().size() == 0) {
+    if (app.contact().all().size() == 0) {
       app.contact().initContactGreation();
       app.contact().create(new ContactData()
                       .withFirstname("Иван")
                       .withLastname("Иванов")
-                      .withMobile("123456")
+                      .withMobilePhone("123456")
                       .withEmail("sobaka@mail.com")
                       .withAddress("Пушкина").withGroup("test1")
               , true);
