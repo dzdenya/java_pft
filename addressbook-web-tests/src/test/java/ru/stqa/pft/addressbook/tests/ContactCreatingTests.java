@@ -11,26 +11,35 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreatingTests extends TestBase {
 
-    @BeforeMethod
-    public void ensurePrecondition() {
-        app.goTo().groupPage();
-        if (app.group().all().size() == 0) {
-            app.group().create(new GroupData().withName("test1"));
-        }
-        app.goTo().homePage();
+  @BeforeMethod
+  public void ensurePrecondition() {
+    app.goTo().groupPage();
+    if (app.group().all().size() == 0) {
+      app.group().create(new GroupData().withName("test1"));
     }
+    app.goTo().homePage();
+  }
 
-    @Test
-    public void ContactCreatingTests() {
-        Contacts before = app.contact().all();
-        app.goTo().gotoAddNewPage();
-        ContactData contact = new ContactData().withFirstname("Иван").withLastname("Иванов").withGroup("test1");
-        app.contact().create(contact, true);
-        app.goTo().homePage();
-        assertThat(app.contact().contactCount(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
+  @Test
+  public void ContactCreatingTests() {
+    Contacts before = app.contact().all();
+    app.goTo().gotoAddNewPage();
+    ContactData contact = new ContactData()
+            .withFirstname("Иван")
+            .withLastname("Иванов")
+            .withHomePhone("7800")
+            .withMobilePhone("333333")
+            .withWorkPhone("222222")
+            .withEmail("sobaka@mail.com")
+            .withAddress("Пушкина 19")
+            .withGroup("test1");
+    app.contact().create(contact, true);
+    app.goTo().homePage();
+    assertThat(app.contact().contactCount(), equalTo(before.size() + 1));
+    Contacts after = app.contact().all();
 
-        assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
-    }
+  }
+
 }
