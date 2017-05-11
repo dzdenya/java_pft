@@ -33,7 +33,7 @@ public class ContactPhoneInfoTests extends TestBase {
     }
   }
 
-  @Test
+  @Test (enabled = false)
   public void testContactInfo() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
