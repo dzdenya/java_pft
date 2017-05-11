@@ -11,9 +11,6 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Denys on 4/29/2017.
- */
 public class ContactHelper extends HelperBase {
 
   public ContactHelper(WebDriver wd) {
@@ -102,6 +99,12 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
   }
 
+  public void initContactInfoById(int id) {
+//    wd.findElement(By.cssSelector("input[id='" + id + "']"));
+//    wd.findElement(By.xpath(".//td[7]")).click();
+    wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
+  }
+
   public void submitContactModification() {
     click(By.name("update"));
   }
@@ -170,5 +173,18 @@ public class ContactHelper extends HelperBase {
               .withAllPhones(allPhones));
     }
     return new Contacts(contactCache);
+  }
+
+
+
+  public ContactData infoContactDetails(ContactData contact) {
+    initContactInfoById(contact.getId());
+    String allDetails = wd.findElement(By.xpath("//*[@id='content']")).getText();
+//    String[] text = wd.findElement(By.xpath("//*[@id='content']")).getText().split("\n");
+    System.out.println(allDetails);
+    wd.navigate().back();
+    return new ContactData()
+            .withId(contact.getId())
+            .withAllDedails(allDetails);
   }
 }

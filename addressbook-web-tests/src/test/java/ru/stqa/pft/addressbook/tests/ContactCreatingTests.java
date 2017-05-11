@@ -35,8 +35,8 @@ public class ContactCreatingTests extends TestBase {
             .withWorkPhone("222222")
             .withEmail("sobaka@mail.com")
             .withAddress("Пушкина 19")
-            .withGroup("test1")
-            .withPhoto(photo);
+            .withGroup("test1");
+//            .withPhoto(photo);
     app.contact().create(contact, true);
     app.goTo().homePage();
     assertThat(app.contact().contactCount(), equalTo(before.size() + 1));

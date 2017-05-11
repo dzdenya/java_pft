@@ -10,9 +10,6 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-/**
- * Created by Denys on 05/05/17.
- */
 public class ContactPhoneTests extends TestBase {
 
   @BeforeMethod
@@ -40,9 +37,11 @@ public class ContactPhoneTests extends TestBase {
     ContactData contactInfoEditForm = app.contact().infoFromEditForm(contact);
 
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoEditForm)) );
+    assertThat(contact.getAddress(), equalTo(contactInfoEditForm.getAddress()) );
+    assertThat(contact.getEmail(), equalTo(contactInfoEditForm.getEmail()) );
   }
 
-  @Test
+  /*@Test
   public void testAddressModification() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
@@ -58,7 +57,7 @@ public class ContactPhoneTests extends TestBase {
     ContactData contactInfoEditForm = app.contact().infoFromEditForm(contact);
 
     assertThat(contact.getEmail(), equalTo(contactInfoEditForm.getEmail()) );
-  }
+  }*/
 
   private String mergePhones(ContactData contact) {
     return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
