@@ -43,12 +43,13 @@ public class ContactDataCenerator {
   private void save(List<ContactData> contacts, File file) throws IOException {
     Writer writer = new FileWriter(file);
     for (ContactData contact : contacts){
-      writer.write(String.format("%s;%s;%s;%s;%s\n",
+      writer.write(String.format("%s;%s;%s;%s;%s;%s\n",
               contact.getFirstname(),
               contact.getLastname(),
               contact.getAddress(),
               contact.getEmail(),
-              contact.getMobilePhone()));
+              contact.getMobilePhone(),
+              contact.getGroup()));
     }
     writer.close();
   }
@@ -57,11 +58,12 @@ public class ContactDataCenerator {
     List<ContactData> contacts = new ArrayList<ContactData>();
     for (int i = 0; i < count; i++) {
       contacts.add(new ContactData()
-              .withFirstname(String.format("name1 %s", i))
-              .withLastname(String.format("name2 %s", i))
+              .withFirstname(String.format("firstname%s", i))
+              .withLastname(String.format("lastname%s", i))
               .withAddress(String.format("address %s", i))
-              .withEmail(String.format("email@mail.com %s", i))
-              .withMobilePhone(String.format("12345 %s", i)));
+              .withEmail(String.format("email@mail.com", i))
+              .withMobilePhone(String.format("12345%s", i))
+              .withGroup(String.format("test1", i)));
     }
     return contacts;
   }
