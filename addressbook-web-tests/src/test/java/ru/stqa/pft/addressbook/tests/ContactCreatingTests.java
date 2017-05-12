@@ -50,7 +50,6 @@ public class ContactCreatingTests extends TestBase {
       Contacts before = app.contact().all();
       app.goTo().gotoAddNewPage();
       File photo = new File("src/test/resources/l6m1.png");
-//            .withPhoto(photo);
       app.contact().create(contact, true);
       app.goTo().homePage();
       assertThat(app.contact().contactCount(), equalTo(before.size() + 1));
