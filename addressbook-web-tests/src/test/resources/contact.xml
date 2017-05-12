@@ -1,3 +1,29 @@
-firstname0;lastname0;address 0;email@mail.com;123450;test1
-firstname1;lastname1;address 1;email@mail.com;123451;test1
-firstname2;lastname2;address 2;email@mail.com;123452;test1
+<list>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <id>2147483647</id>
+    <firstname>firstname0</firstname>
+    <lastname>lastname0</lastname>
+    <mobilePhone>123450</mobilePhone>
+    <email>email@mail.com</email>
+    <address>address 0</address>
+    <group>test1</group>
+  </ru.stqa.pft.addressbook.model.ContactData>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <id>2147483647</id>
+    <firstname>firstname1</firstname>
+    <lastname>lastname1</lastname>
+    <mobilePhone>123451</mobilePhone>
+    <email>email@mail.com</email>
+    <address>address 1</address>
+    <group>test1</group>
+  </ru.stqa.pft.addressbook.model.ContactData>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <id>2147483647</id>
+    <firstname>firstname2</firstname>
+    <lastname>lastname2</lastname>
+    <mobilePhone>123452</mobilePhone>
+    <email>email@mail.com</email>
+    <address>address 2</address>
+    <group>test1</group>
+  </ru.stqa.pft.addressbook.model.ContactData>
+</list>
