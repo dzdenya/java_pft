@@ -63,7 +63,7 @@ public class ContactDataCenerator {
   private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
     Writer writer = new FileWriter(file);
     for (ContactData contact : contacts){
-      writer.write(String.format("%s;%s;%s;%s;%s;%s\n",
+      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s\n",
               contact.getFirstname(),
               contact.getLastname(),
               contact.getAddress(),
@@ -83,7 +83,8 @@ public class ContactDataCenerator {
               .withAddress(String.format("address %s", i))
               .withEmail(String.format("email@mail.com", i))
               .withMobilePhone(String.format("12345%s", i))
-              .withGroup(String.format("test1", i)));
+              .withGroup(String.format("test1", i))
+              .withPhoto(String.format("src/test/resources/l6m1.png", i)));
     }
     return contacts;
   }

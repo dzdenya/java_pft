@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.io.File;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class ContactModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePrecondition() {
     app.goTo().homePage();
-    if (app.contact().all().size() == 0) {
+    if (app.db().contacts().size() == 0) {
       app.contact().initContactGreation();
       app.contact().create(new ContactData()
                       .withFirstname("Иван")
@@ -41,8 +42,9 @@ public class ContactModificationTests extends TestBase {
 
   @Test
   public void testContactModification() {
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     ContactData modifyContact = before.iterator().next();
+    File photo = new File("src/test/resources/l6m1.png");
     ContactData contact = new ContactData()
             .withId(modifyContact.getId())
             .withFirstname("Иван")
@@ -51,11 +53,12 @@ public class ContactModificationTests extends TestBase {
             .withMobilePhone("33-33-33")
             .withEmail("mail@mail.com")
             .withAddress("Ленина 19")
-            .withWorkPhone("22 22 22");
+            .withWorkPhone("22 22 22")
+            .withPhoto(photo);
     app.contact().modifyContact(contact);
     assertThat(app.contact().contactCount(), equalTo(before.size()));
 
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.without(modifyContact).withAdded(contact)));
   }
 

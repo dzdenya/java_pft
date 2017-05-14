@@ -43,7 +43,7 @@ public class ContactData {
   private String allDedails;
   @Column (name = "photo")
   @Type(type = "text")
-  private String  photo;
+  private String photo;
 
   public String getAllDedails() {
     return allDedails;
@@ -63,6 +63,11 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withPhoto(String format) {
+    this.photo = photo;
+    return this;
+  }
+
   public String getAllPhones() {
     return allPhones;
   }
@@ -71,7 +76,6 @@ public class ContactData {
     this.id = id;
     return this;
   }
-
   public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
     return this;
@@ -104,6 +108,7 @@ public class ContactData {
     this.address = address;
     return this;
   }
+
   public ContactData withGroup(String group) {
     this.group = group;
     return this;

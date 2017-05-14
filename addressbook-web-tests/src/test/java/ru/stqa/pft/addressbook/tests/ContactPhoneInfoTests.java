@@ -18,7 +18,7 @@ public class ContactPhoneInfoTests extends TestBase {
   @BeforeMethod
   public void ensurePrecondition() {
     app.goTo().homePage();
-    if (app.contact().all().size() == 0) {
+    if (app.db().contacts().size() == 0) {
       app.contact().initContactGreation();
       app.contact().create(new ContactData()
                       .withFirstname("Иван")
@@ -36,7 +36,7 @@ public class ContactPhoneInfoTests extends TestBase {
   @Test (enabled = false)
   public void testContactInfo() {
     app.goTo().homePage();
-    ContactData contact = app.contact().all().iterator().next();
+    ContactData contact = app.db().contacts().iterator().next();
     ContactData contactInfoContactDetails = app.contact().infoContactDetails(contact);
 
     assertThat(contact.getAllDedails(), equalTo(mergeDetails(contactInfoContactDetails)) );
@@ -53,7 +53,7 @@ public class ContactPhoneInfoTests extends TestBase {
             contact.getHomePhone(),
             contact.getMobilePhone(),
             contact.getWorkPhone())
-            .stream().filter(s -> !(s==null || s.equals("")))
+            .stream().filter(s -> !(s == null || s.equals("")))
             .map(ContactPhoneInfoTests::cleaned)
             .collect(Collectors .joining("\n"));
   }
