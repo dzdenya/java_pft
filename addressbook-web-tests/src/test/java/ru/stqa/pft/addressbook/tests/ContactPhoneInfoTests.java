@@ -33,13 +33,13 @@ public class ContactPhoneInfoTests extends TestBase {
     }
   }
 
-  @Test (enabled = false)
+  @Test(enabled = false)
   public void testContactInfo() {
     app.goTo().homePage();
     ContactData contact = app.db().contacts().iterator().next();
     ContactData contactInfoContactDetails = app.contact().infoContactDetails(contact);
 
-    assertThat(contact.getAllDedails(), equalTo(mergeDetails(contactInfoContactDetails)) );
+    assertThat(contact.getAllDedails(), equalTo(mergeDetails(contactInfoContactDetails)));
 
   }
 
@@ -55,10 +55,10 @@ public class ContactPhoneInfoTests extends TestBase {
             contact.getWorkPhone())
             .stream().filter(s -> !(s == null || s.equals("")))
             .map(ContactPhoneInfoTests::cleaned)
-            .collect(Collectors .joining("\n"));
+            .collect(Collectors.joining("\n"));
   }
 
-  public static String cleaned(String phone){
+  public static String cleaned(String phone) {
     return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
 }
