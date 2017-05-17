@@ -17,9 +17,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 
-/**
- * Created by Denys on 4/29/2017.
- */
+
 public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
@@ -35,7 +33,7 @@ public class ContactModificationTests extends TestBase {
                       .withWorkPhone("22 22 22")
                       .withEmail("sobaka@mail.com")
                       .withAddress("Пушкина 444")
-                      .withGroup("test1")
+//                      .withGroup("test1")
               , true);
     }
   }

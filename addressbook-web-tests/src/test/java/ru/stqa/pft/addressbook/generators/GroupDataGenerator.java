@@ -15,9 +15,7 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Denys on 09-May-17.
- */
+
 public class GroupDataGenerator {
 
   @Parameter(names = "-c", description = "Group count")

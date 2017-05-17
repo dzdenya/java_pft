@@ -8,9 +8,7 @@ import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.List;
 
-/**
- * Created by Denys on 4/28/2017.
- */
+
 public class GroupHelper extends HelperBase{
 
   public GroupHelper(WebDriver wd) {

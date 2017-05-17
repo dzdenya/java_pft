@@ -16,9 +16,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 import static org.testng.Assert.*;
 
-/**
- * Created by Denys on 4/29/2017.
- */
+
 public class GroupModificationTests extends TestBase {
 
   @BeforeMethod

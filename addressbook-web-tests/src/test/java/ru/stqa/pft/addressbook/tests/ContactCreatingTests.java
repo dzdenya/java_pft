@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -26,14 +27,14 @@ public class ContactCreatingTests extends TestBase {
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contact.xml")))) {
       String xml = "";
       String line = reader.readLine();
-      while (line != null){
+      while (line != null) {
         xml += line;
         line = reader.readLine();
       }
       XStream xstream = new XStream();
       xstream.processAnnotations(ContactData.class);
       List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
-      return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+      return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -46,17 +47,18 @@ public class ContactCreatingTests extends TestBase {
     app.goTo().homePage();
   }
 
-  @Test (dataProvider = "validContacts")
+  @Test(dataProvider = "validContacts")
   public void ContactCreatingTests(ContactData contact) {
-      Contacts before = app.db().contacts();
-      app.goTo().gotoAddNewPage();
-      File photo = new File("src/test/resources/l6m1.png");
-      app.contact().create(contact, true);
-      app.goTo().homePage();
-      assertThat(app.contact().contactCount(), equalTo(before.size() + 1));
-      Contacts after = app.db().contacts();
+    Groups groups = app.db().groups();
+    File photo = new File("src/test/resources/l6m1.png");
+    Contacts before = app.db().contacts();
+    app.goTo().gotoAddNewPage();
+    app.contact().create(contact, true);
+    app.goTo().homePage();
+    assertThat(app.contact().contactCount(), equalTo(before.size() + 1));
+    Contacts after = app.db().contacts();
 
-      assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-      verifyContactListInUI();
+    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    verifyContactListInUI();
   }
 }

@@ -25,42 +25,33 @@ public class ContactPhoneTests extends TestBase {
                       .withWorkPhone("22 22 22")
                       .withEmail("sobaka@mail.com")
                       .withAddress("Пушкина 19")
-                      .withGroup("test1")
+//                      .withGroup("test1")
               , true);
     }
   }
 
   @Test
-  public void testContactModification() {
+  public void testContactPhones() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoEditForm = app.contact().infoFromEditForm(contact);
 
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoEditForm)) );
-    assertThat(contact.getAddress(), equalTo(contactInfoEditForm.getAddress()) );
-    assertThat(contact.getEmail(), equalTo(contactInfoEditForm.getEmail()) );
-  }
-
-  /*@Test
-  public void testAddressModification() {
-    app.goTo().homePage();
-    ContactData contact = app.contact().all().iterator().next();
-    ContactData contactInfoEditForm = app.contact().infoFromEditForm(contact);
-
+    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoEditForm)) );
     assertThat(contact.getAddress(), equalTo(contactInfoEditForm.getAddress()) );
   }
-
-  @Test
-  public void testEmailModification() {
-    app.goTo().homePage();
-    ContactData contact = app.contact().all().iterator().next();
-    ContactData contactInfoEditForm = app.contact().infoFromEditForm(contact);
-
-    assertThat(contact.getEmail(), equalTo(contactInfoEditForm.getEmail()) );
-  }*/
 
   private String mergePhones(ContactData contact) {
-    return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+     String result = Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+            .stream().filter((s) -> ! s.equals(""))
+            .map(ContactPhoneTests::cleaned)
+            .collect(Collectors.joining("\n"));
+    return result;
+
+  }
+
+  private String mergeEmails(ContactData contact) {
+    return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
             .stream().filter((s) -> ! s.equals(""))
             .map(ContactPhoneTests::cleaned)
             .collect(Collectors.joining("\n"));
@@ -71,3 +62,4 @@ public class ContactPhoneTests extends TestBase {
     return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
 }
+

@@ -4,17 +4,17 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-/**
- * Created by Denys on 4/29/2017.
- */
+
 public class ContactDeletiongTests extends TestBase {
 
   @BeforeMethod
   public void ensurePrecondition() {
+    Groups groups = app.db().groups();
     app.goTo().homePage();
     if (app.db().contacts().size() == 0) {
       app.contact().initContactGreation();
@@ -26,7 +26,7 @@ public class ContactDeletiongTests extends TestBase {
                       .withWorkPhone("222222")
                       .withEmail("sobaka@mail.com")
                       .withAddress("Пушкина 19")
-                      .withGroup("test1")
+                      .inGroup(groups.iterator().next())
               , true);
     }
   }

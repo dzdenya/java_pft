@@ -14,9 +14,7 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by Denys on 4/28/2017.
- */
+
 public class ApplicationManager {
 
   private final Properties properties;
